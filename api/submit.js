@@ -2,7 +2,7 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
       // Use your working Apps Script Web App URL
-      const response = await fetch('https://script.google.com/macros/s/AKfycbxUJMBUClyLNebML53RPhFnXEBJKvC-Nd8OisvOu68z6_q46ZJk9Dtt_BgRdY9AgjtvaQ/exec', {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbzgAdAf-CIDJlJlMoeHUcMVY9XyDEYYXKHDkhDQIoNWpXJ-EzAlHt8s8HuduS2CugxbHg/exec', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(req.body)
