@@ -12,5 +12,5 @@ export default defineConfig({
     host: true, // already needed for Docker
     port: 5173,
   },
-  base: '/dr-drill-form/'
+  base: '/',
 })
