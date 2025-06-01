@@ -8,11 +8,13 @@ function App() {
     organization: '',
     email: ''
   });
+  const APPS_SCRIPT_URL = '/api/submit';
+  //const APPS_SCRIPT_URL = '/.netlify/functions/submit';
   const [images, setImages] = useState({});
   const [submitting, setSubmitting] = useState(false);
 
   // Replace with your deployed Apps Script Web App URL
-  const APPS_SCRIPT_URL = 'https://script.google.com/a/macros/sabah-net.com/s/AKfycbzdUboTdeHvwCNJp29e2khdwSgPxbHymYtQHeh4Nq0v87_eTX8EYhZ4x0J23GO8K9l6/exec';
+  //const APPS_SCRIPT_URL = 'https://script.google.com/a/macros/sabah-net.com/s/AKfycbzdUboTdeHvwCNJp29e2khdwSgPxbHymYtQHeh4Nq0v87_eTX8EYhZ4x0J23GO8K9l6/exec';
 
   const handleUserInfoChange = (e) => {
     setUserInfo({
