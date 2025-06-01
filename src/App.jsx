@@ -12,7 +12,7 @@ function App() {
   const [submitting, setSubmitting] = useState(false);
 
   // Replace with your deployed Apps Script Web App URL
-  const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_WEBAPP_URL';
+  const APPS_SCRIPT_URL = '/api/submit';
 
   const handleUserInfoChange = (e) => {
     setUserInfo({
