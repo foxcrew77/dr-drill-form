@@ -6,9 +6,24 @@ export default async function handler(req, res) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(req.body)
       });
-      const data = await response.json();
+
+      // Try to read as text first
+      const text = await response.text();
+
+      // Try to parse as JSON, but catch if it fails
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (err) {
+        // Log the raw response for debugging
+        console.error('Google Apps Script response:', text);
+        throw new Error('Google Apps Script did not return JSON. Raw response: ' + text);
+      }
+
       res.status(200).json(data);
     } catch (err) {
+      // Log the error for Vercel logs
+      console.error('API error:', err.message);
       res.status(500).json({ status: 'error', message: err.message });
     }
   } else {
