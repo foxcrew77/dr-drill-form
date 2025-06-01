@@ -1,32 +1,36 @@
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
+      // Use your working Apps Script Web App URL
       const response = await fetch('https://script.google.com/macros/s/AKfycbz4naLStd_xNEHBgvEFrKqepGdQUgMDwb1srHEvTTswDQEc0MMe9Jr2aCiD8KWacIUDnA/exec', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(req.body)
       });
 
+      // Check if response is ok
+      if (!response.ok) {
+        throw new Error(`Apps Script responded with status: ${response.status}`);
+      }
+
       // Try to read as text first
       const text = await response.text();
 
-      // Try to parse as JSON, but catch if it fails
+      // Try to parse as JSON
       let data;
       try {
         data = JSON.parse(text);
       } catch (err) {
-        // Log the raw response for debugging
-        console.error('Google Apps Script response:', text);
-        throw new Error('Google Apps Script did not return JSON. Raw response: ' + text);
+        console.error('Apps Script response is not JSON:', text);
+        throw new Error('Apps Script did not return valid JSON');
       }
 
       res.status(200).json(data);
     } catch (err) {
-      // Log the error for Vercel logs
       console.error('API error:', err.message);
       res.status(500).json({ status: 'error', message: err.message });
     }
   } else {
     res.status(405).json({ error: 'Method not allowed' });
   }
-}
+} 
