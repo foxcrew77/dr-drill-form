@@ -8,13 +8,11 @@ function App() {
     organization: '',
     email: ''
   });
-  const APPS_SCRIPT_URL = '/api/submit';
-  //const APPS_SCRIPT_URL = '/.netlify/functions/submit';
   const [images, setImages] = useState({});
   const [submitting, setSubmitting] = useState(false);
 
   // Replace with your deployed Apps Script Web App URL
-  //const APPS_SCRIPT_URL = 'https://script.google.com/a/macros/sabah-net.com/s/AKfycbzdUboTdeHvwCNJp29e2khdwSgPxbHymYtQHeh4Nq0v87_eTX8EYhZ4x0J23GO8K9l6/exec';
+  const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_WEBAPP_URL';
 
   const handleUserInfoChange = (e) => {
     setUserInfo({
@@ -75,8 +73,9 @@ function App() {
         headers: { 'Content-Type': 'application/json' }
       });
       const result = await res.json();
+      console.log('Full response from Apps Script:', result);
       if (result.status === 'success') {
-        alert('Submission successful!');
+        alert(`Submission successful!\n\nDebug Info:\nName: ${result.received?.name}\nOrganization: ${result.received?.organization}\nEmail: ${result.received?.email}\nImages: ${result.received?.imageCount}\nFirst Image: ${result.received?.firstImageInfo?.filename || 'none'}`);
         setUserInfo({ name: '', organization: '', email: '' });
         setImages({});
       } else {
